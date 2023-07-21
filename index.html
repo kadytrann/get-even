@@ -11,28 +11,30 @@
     #container{
       border-radius: 5px;
       min-height: 40px;
-      border:1px solid lightskyblue;
+      border:1px solid black;
       width:50%;
       margin:auto;
       font-size:x-large;
-    }
-
-    #submit{
-      border-radius: 5px;
-      border:1px solid lightskyblue;
-      background-color: lightskyblue;
-      color:white;
     }
   </style>
  </head>
  <body>
      <header>
-
-  <h1 class="page-header">Get Even</h1>
+     <h1 class="page-header">Get Even</h1>
+     <h2>Purpose:</h2>
+     <p>This page allows you to input a number and determines whether it is even or an odd number.</p>
+        <nav class="topnav" id="myTopnav">
+            <a href="index.html" class="active">Home</a>
+            <a href="#">Link</a>
+            <a href="#">Link</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+        </nav>
+     </header>
+     
    <main class="wrapper">
-
+ 
     <h2 class="subheader">Place form code below:</h2>
-    <div id="output">
+    <div id="output"></div>
     <form method="get" action="" class="main-form">
       <div>
         <label for="input">Input</label><br>
@@ -41,9 +43,8 @@
       <div>
         <input type="submit" id="submit">
       </div>
-
     </form>
-    <footer>
+      <br>
       <p><small>&copy; 2021-<span id="this-year"></span> by 
           Kady Tran, All Rights Reserved ~ 
           <a id="html-checker" href="#" target="_blank">Check HTML</a> ~ 
@@ -54,10 +55,18 @@
   <script src="js/main.js"></script> 
   <script>
 
-const queryString = window.location.search;
-let myOutput = '<div id="container">';//will store data for display
-const urlParams = new URLSearchParams(queryString);
+function getEven(num){
+  if(num % 2 ==0){//even
+    return true;
+  }else{//odd
+    return false;
+  }
+}
 
+
+const queryString = window.location.search;
+
+const urlParams = new URLSearchParams(queryString);
 
 if(queryString.length > 0){//form submitted!
      let myOutput = `<div id="container">`;//will store data for display
@@ -65,19 +74,20 @@ if(queryString.length > 0){//form submitted!
        if(urlParams.has("input")){
            //alert(urlParams.get("input"));
 
-
            let myInput = urlParams.get("input");
 
-
-
-
-           myOutput += `<p>You input ${myInput}</p>`;
+           if(getEven(myInput)){//even output
+            myOutput += `<p>You input <b>${myInput}</b> and the number is even</p>`;
+          }else{//odd output
+            myOutput += `<p>You input <b>${myInput}</b> and the number is odd</p>`;
+          }
+  
        }
        myOutput += `<p><a href="index.html">CLEAR</a></p>`; 
      myOutput += `</div>`;
    
      document.querySelector("#output").innerHTML = myOutput;
-   }
+    }
 
   </script>  
  </body>
